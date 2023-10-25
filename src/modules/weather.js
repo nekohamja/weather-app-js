@@ -2,7 +2,11 @@
 export default class weather {
   static async getData(city) {
     if (city === "") return;
-    const url = `http://api.weatherapi.com/v1/forecast.json?key=f2dadfc93b46435e9c410604232410&q=${city}&days=1&aqi=no&alerts=no`;
+
+    const url =
+      location.protocol === "http:"
+        ? `http://api.weatherapi.com/v1/forecast.json?key=f2dadfc93b46435e9c410604232410&q=${city}&days=1&aqi=no&alerts=no`
+        : `https://api.weatherapi.com/v1/forecast.json?key=f2dadfc93b46435e9c410604232410&q=${city}&days=1&aqi=no&alerts=no`;
 
     try {
       const response = await fetch(url, { mode: "cors" });
