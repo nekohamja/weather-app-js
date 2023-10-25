@@ -27,11 +27,15 @@
         </div>
         <h1 class="greeting"></h1>
         <p id="date"></p>
-        <div class="temperature-scale"></div>
+        <div class="temperature-scale">
+          <button class="celsius active">°C</button>
+          <button class="fahrenheit">°F</button>
+        </div>
       </header>
 
       <section class="current-weather">
         <div>
+          <img id="weather-icon" src="" />
           <h1 id="temperature"></h1>
           <h3 id="region"></h3>
           <div>
@@ -63,6 +67,7 @@
             <div class="percentage">
               <hr />
             </div>
+            <p class="parameter-message"></p>
           </div>
 
           <div class="parameter">
@@ -83,6 +88,7 @@
             <div class="percentage">
               <hr />
             </div>
+            <p class="parameter-message"></p>
           </div>
 
           <div class="parameter">
@@ -103,6 +109,7 @@
             <div class="percentage">
               <hr />
             </div>
+            <p class="parameter-message"></p>
           </div>
         </div>
       </section>

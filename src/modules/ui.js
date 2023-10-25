@@ -28,6 +28,9 @@ export default class ui {
     temperature.textContent = `${data.current.temp_c} °C`;
 
     ui.setPercentageBars(data);
+    ui.setTemperatureScale(data);
+    ui.setWeatherIcon(data);
+    ui.setMessages();
   }
 
   static setPercentageBars(data) {
@@ -46,6 +49,58 @@ export default class ui {
     uv.parentNode.parentNode.childNodes[3].childNodes[1].style.width = `${weather.calculateUV(
       data.current.uv
     )}%`;
+  }
+
+  static setTemperatureScale(data) {
+    const celsiusButton = document.querySelector(".celsius");
+    const fahrenheitButton = document.querySelector(".fahrenheit");
+    const temperature = document.querySelector("#temperature");
+    const feelslike = document.querySelector("#feelslike");
+
+    celsiusButton.addEventListener("click", () => {
+      celsiusButton.classList.add("active");
+      fahrenheitButton.classList.remove("active");
+      temperature.textContent = `${data.current.temp_c} °C`;
+      feelslike.textContent = `Feels like ${data.current.feelslike_c} °C`;
+    });
+    fahrenheitButton.addEventListener("click", () => {
+      fahrenheitButton.classList.add("active");
+      celsiusButton.classList.remove("active");
+      temperature.textContent = `${data.current.temp_f} °F`;
+      feelslike.textContent = `Feels like ${data.current.feelslike_f} °F`;
+    });
+  }
+
+  static setWeatherIcon(data) {
+    const iconContainer = document.querySelector("#weather-icon");
+    const iconName = data.current.condition.icon.slice(-7);
+    const isDay = data.current.is_day;
+
+    if (isDay) iconContainer.src = `../src/weather/64x64/day/${iconName}`;
+    else iconContainer.src = `../src/weather/64x64/night/${iconName}`;
+  }
+
+  static setMessages() {
+    const humidity = document.querySelector("#humidity");
+    // const wind = document.querySelector("#wind");
+    const uv = document.querySelector("#uv");
+
+    if (humidity.textContent.slice(0, -1) >= 65) {
+      humidity.parentNode.parentNode.childNodes[5].textContent =
+        "Light clothing is recommended";
+    } else if (humidity.textContent.slice(0, -1) <= 30)
+      humidity.parentNode.parentNode.childNodes[5].textContent =
+        "Moisturizing skin is recommended";
+
+    if (uv.textContent >= 4) {
+      uv.parentNode.parentNode.childNodes[5].textContent =
+        "Sunscreen recommended";
+    } else if (uv.textContent >= 8)
+      uv.parentNode.parentNode.childNodes[5].textContent =
+        "Avoid staying outdoors for too long";
+
+    // console.log("uv value" + data.current.uv);
+    // console.log(uv.textContent);
   }
 
   static handleSearchBar() {

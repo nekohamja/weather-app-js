@@ -48,9 +48,31 @@
     }
   }
   .temperature-scale {
-    @include neumorphism(12px, 12px);
+    // @include neumorphism(0px, 12px);
+    border-radius: 12px;
     width: 72px;
     height: 32px;
+    display: flex;
+    overflow: hidden;
+    button {
+      width: 100%;
+      transition: box-shadow 200ms ease-in-out;
+      z-index: 10;
+      font-weight: bold;
+      color: $font-color;
+    }
+    .fahrenheit {
+      @include neumorphism(0px, 0px);
+      &.active {
+        @include neumorphism-inset(none, 0px);
+      }
+    }
+    .celsius {
+      @include neumorphism(0px, 0px);
+      &.active {
+        @include neumorphism-inset(none, 0px);
+      }
+    }
   }
 }
 
@@ -84,7 +106,7 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       gap: 4px;
       > div:first-child {
         width: 100%;
@@ -111,7 +133,7 @@
           background: linear-gradient(white, white) padding-box,
             linear-gradient(to right, rgb(37, 37, 187), rgb(212, 116, 191))
               border-box;
-          border: 2px solid transparent;
+          border: 3px solid transparent;
         }
       }
     }

@@ -11,9 +11,9 @@ export default class weather {
     try {
       const response = await fetch(url, { mode: "cors" });
       if (!response.ok) throw new Error(`City ${city} not found.`);
-      // const data = weather.convertData(await response.json());
+      const data = weather.convertData(await response.json());
 
-      const data = await response.json();
+      // const data = await response.json();
       console.log(data);
 
       return data;

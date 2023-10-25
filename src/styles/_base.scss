@@ -37,12 +37,17 @@ h1 {
 
 h3 {
   margin: 0;
-  font-size: 1.1em;
+  font-size: 1.3em;
   color: $font-color;
 }
 
 svg {
   fill: $font-color;
+}
+
+button {
+  border: none;
+  background: none;
 }
 
 input {
