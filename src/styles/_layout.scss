@@ -1,0 +1,125 @@
+@import "mixins";
+
+.header {
+  grid-column: 1/5;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  h1 {
+    padding-top: 22px;
+  }
+
+  .search-bar {
+    @include neumorphism(none, 12px);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    gap: 4px;
+    transition: box-shadow 200ms ease-in-out;
+    &.active {
+      @include neumorphism-inset(none, 12px);
+    }
+
+    &:hover {
+      cursor: pointer;
+      @include neumorphism-inset(none, 12px);
+    }
+
+    .search-icon {
+      @include neumorphism(8px, 12px);
+      display: flex;
+      align-items: center;
+      aspect-ratio: 1;
+      height: 100%;
+
+      background: rgb(197, 197, 226);
+
+      svg {
+        fill: rgb(100, 88, 255);
+      }
+    }
+
+    input {
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      padding: 12px 12px;
+    }
+  }
+  .temperature-scale {
+    @include neumorphism(12px, 12px);
+    width: 72px;
+    height: 32px;
+  }
+}
+
+.current-weather {
+  grid-column: 1/5;
+  grid-row: 2/3;
+  @include neumorphism-inset(12px, 12px);
+  display: flex;
+  align-items: center;
+  > div:first-child {
+    width: 100%;
+    text-align: left;
+
+    h1 {
+      font-size: 3em;
+    }
+    > div {
+      align-items: center;
+
+      display: flex;
+      gap: 2px;
+    }
+  }
+  > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+
+    > .parameter {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      > div:first-child {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        > p:last-child {
+          text-align: end;
+          flex: 1;
+        }
+      }
+      > .percentage {
+        @include neumorphism-inset(0px, 0px);
+        width: 100%;
+        height: 4px;
+        display: flex;
+        justify-content: flex-start;
+        overflow: hidden;
+        border-radius: 4px;
+        background: rgba(10, 99, 169, 0.16);
+        hr {
+          width: 0%;
+          transition: width 1.5s ease-in-out;
+          background: linear-gradient(white, white) padding-box,
+            linear-gradient(to right, rgb(37, 37, 187), rgb(212, 116, 191))
+              border-box;
+          border: 2px solid transparent;
+        }
+      }
+    }
+  }
+}
+
+.forecast {
+  grid-column: 1/5;
+  grid-row: 3/5;
+  @include neumorphism-inset(12px, 12px);
+}
