@@ -34,12 +34,17 @@ h1 {
 
 h3 {
   margin: 0;
-  font-size: 1.1em;
+  font-size: 1.3em;
   color: rgb(66, 65, 77);
 }
 
 svg {
   fill: rgb(66, 65, 77);
+}
+
+button {
+  border: none;
+  background: none;
 }
 
 input {
@@ -94,7 +99,7 @@ main {
 .header .search-bar {
   padding: none;
   border-radius: 12px;
-  box-shadow: 5px 5px 5px -1px #c0c2cf, -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
+  box-shadow: 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -104,18 +109,18 @@ main {
 .header .search-bar.active {
   padding: none;
   border-radius: 12px;
-  box-shadow: 0px 0px 0px 0px #c0c2cf, 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px #c0c2cf, inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 0px 0px 0px rgba(155, 158, 172, 0.5568627451), 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
 }
 .header .search-bar:hover {
   cursor: pointer;
   padding: none;
   border-radius: 12px;
-  box-shadow: 0px 0px 0px 0px #c0c2cf, 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px #c0c2cf, inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 0px 0px 0px rgba(155, 158, 172, 0.5568627451), 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
 }
 .header .search-bar .search-icon {
   padding: 8px;
   border-radius: 12px;
-  box-shadow: 5px 5px 5px -1px #c0c2cf, -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
+  box-shadow: 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
   display: flex;
   align-items: center;
   aspect-ratio: 1;
@@ -132,11 +137,38 @@ main {
   padding: 12px 12px;
 }
 .header .temperature-scale {
-  padding: 12px;
   border-radius: 12px;
-  box-shadow: 5px 5px 5px -1px #c0c2cf, -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
   width: 72px;
   height: 32px;
+  display: flex;
+  overflow: hidden;
+}
+.header .temperature-scale button {
+  width: 100%;
+  transition: box-shadow 200ms ease-in-out;
+  z-index: 10;
+  font-weight: bold;
+  color: rgb(66, 65, 77);
+}
+.header .temperature-scale .fahrenheit {
+  padding: 0px;
+  border-radius: 0px;
+  box-shadow: 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
+}
+.header .temperature-scale .fahrenheit.active {
+  padding: none;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px 0px rgba(155, 158, 172, 0.5568627451), 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
+}
+.header .temperature-scale .celsius {
+  padding: 0px;
+  border-radius: 0px;
+  box-shadow: 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
+}
+.header .temperature-scale .celsius.active {
+  padding: none;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px 0px rgba(155, 158, 172, 0.5568627451), 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
 }
 
 .current-weather {
@@ -144,7 +176,7 @@ main {
   grid-row: 2/3;
   padding: 12px;
   border-radius: 12px;
-  box-shadow: 0px 0px 0px 0px #c0c2cf, 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px #c0c2cf, inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 0px 0px 0px rgba(155, 158, 172, 0.5568627451), 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
   display: flex;
   align-items: center;
 }
@@ -170,7 +202,7 @@ main {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 4px;
 }
 .current-weather > div:last-child > .parameter > div:first-child {
@@ -186,7 +218,7 @@ main {
 .current-weather > div:last-child > .parameter > .percentage {
   padding: 0px;
   border-radius: 0px;
-  box-shadow: 0px 0px 0px 0px #c0c2cf, 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px #c0c2cf, inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 0px 0px 0px rgba(155, 158, 172, 0.5568627451), 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
   width: 100%;
   height: 4px;
   display: flex;
@@ -199,7 +231,7 @@ main {
   width: 0%;
   transition: width 1.5s ease-in-out;
   background: linear-gradient(white, white) padding-box, linear-gradient(to right, rgb(37, 37, 187), rgb(212, 116, 191)) border-box;
-  border: 2px solid transparent;
+  border: 3px solid transparent;
 }
 
 .forecast {
@@ -207,5 +239,5 @@ main {
   grid-row: 3/5;
   padding: 12px;
   border-radius: 12px;
-  box-shadow: 0px 0px 0px 0px #c0c2cf, 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px #c0c2cf, inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 0px 0px 0px rgba(155, 158, 172, 0.5568627451), 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
 }
