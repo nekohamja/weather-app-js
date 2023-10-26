@@ -4,26 +4,28 @@
   grid-column: 1/5;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  justify-content: center;
 
-  h1 {
-    padding-top: 22px;
+  gap: 22px;
+
+  .heading {
+    display: flex;
+    justify-content: space-between;
   }
-
   .search-bar {
-    @include neumorphism(none, 12px);
+    @include neumorphism(none, 22px);
     display: flex;
     align-items: center;
     overflow: hidden;
     gap: 4px;
     transition: box-shadow 200ms ease-in-out;
     &.active {
-      @include neumorphism-inset(none, 12px);
+      @include neumorphism-inset(none, 22px);
     }
 
     &:hover {
       cursor: pointer;
-      @include neumorphism-inset(none, 12px);
+      @include neumorphism-inset(none, 22px);
     }
 
     .search-icon {
@@ -32,11 +34,9 @@
       align-items: center;
       aspect-ratio: 1;
       height: 100%;
-
-      background: rgb(197, 197, 226);
-
+      background: #6458ff;
       svg {
-        fill: rgb(100, 88, 255);
+        fill: rgb(237, 237, 248);
       }
     }
 
@@ -54,6 +54,7 @@
     height: 32px;
     display: flex;
     overflow: hidden;
+    align-self: center;
     button {
       width: 100%;
       transition: box-shadow 200ms ease-in-out;
@@ -74,26 +75,49 @@
       }
     }
   }
+  .search-message {
+    display: none;
+    width: 10%;
+    &.active {
+      display: flex;
+      animation: 0.5s spin infinite linear;
+    }
+  }
 }
 
 .current-weather {
   grid-column: 1/5;
   grid-row: 2/3;
-  @include neumorphism-inset(12px, 12px);
+  @include neumorphism-inset(12px, 22px);
   display: flex;
-  align-items: center;
+  gap: 22px;
+
   > div:first-child {
+    @include neumorphism(12px, 12px);
     width: 100%;
     text-align: left;
 
+    #temperature {
+      white-space: nowrap;
+    }
+    #condition {
+      padding-bottom: 22px;
+    }
+    #feelslike,
+    #time {
+      font-size: 0.8em;
+      opacity: 0.6;
+    }
+    > div {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
     h1 {
       font-size: 3em;
     }
-    > div {
-      align-items: center;
-
-      display: flex;
-      gap: 2px;
+    img {
+      width: 48px;
     }
   }
   > div:last-child {
@@ -131,17 +155,88 @@
           width: 0%;
           transition: width 1.5s ease-in-out;
           background: linear-gradient(white, white) padding-box,
-            linear-gradient(to right, rgb(37, 37, 187), rgb(212, 116, 191))
+            linear-gradient(to right, rgb(109, 109, 226), rgb(212, 116, 191))
               border-box;
           border: 3px solid transparent;
         }
+      }
+      > .parameter-message {
+        font-size: 0.8em;
+        opacity: 0.6;
       }
     }
   }
 }
 
+.forecast-title {
+  grid-column: 1/5;
+  grid-row: 3/4;
+}
 .forecast {
   grid-column: 1/5;
-  grid-row: 3/5;
-  @include neumorphism-inset(12px, 12px);
+  grid-row: 4/5;
+  @include neumorphism-inset(0px, 22px);
+  overflow: hidden;
+
+  .astro {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 12px;
+    gap: 12px;
+    > div {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      > p:nth-child(2) {
+        flex: 1;
+      }
+    }
+  }
+  h3 {
+    padding: 12px 12px 0px 12px;
+    font-size: 1.1em;
+    opacity: 0.8;
+  }
+  .hour-forecast {
+    .forecast-today-slider,
+    .forecast-tomorrow-slider {
+      display: flex;
+      overflow: scroll;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      gap: 22px;
+      padding-left: 22px;
+      padding-bottom: 4px;
+      padding-top: 12px;
+      margin-bottom: 12px;
+
+      &::-webkit-scrollbar {
+        width: 1px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: rgb(150 150 150);
+        border-radius: 10px;
+      }
+
+      .card {
+        @include neumorphism-inset(12px, 12px);
+        scroll-snap-align: start;
+        scroll-margin-inline-start: 12px;
+        scroll-margin-inline-end: 12px;
+        flex: 0 0 40%;
+        > p:nth-child(2) {
+          font-weight: bold;
+          font-size: 1.2em;
+        }
+        > img {
+          width: 48px;
+        }
+      }
+    }
+  }
 }

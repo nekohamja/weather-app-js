@@ -5,17 +5,13 @@ export default class weather {
 
     const url =
       location.protocol === "http:"
-        ? `http://api.weatherapi.com/v1/forecast.json?key=f2dadfc93b46435e9c410604232410&q=${city}&days=1&aqi=no&alerts=no`
-        : `https://api.weatherapi.com/v1/forecast.json?key=f2dadfc93b46435e9c410604232410&q=${city}&days=1&aqi=no&alerts=no`;
+        ? `http://api.weatherapi.com/v1/forecast.json?key=f2dadfc93b46435e9c410604232410&q=${city}&days=2&aqi=no&alerts=no`
+        : `https://api.weatherapi.com/v1/forecast.json?key=f2dadfc93b46435e9c410604232410&q=${city}&days=2&aqi=no&alerts=no`;
 
     try {
       const response = await fetch(url, { mode: "cors" });
       if (!response.ok) throw new Error(`City ${city} not found.`);
       const data = weather.convertData(await response.json());
-
-      // const data = await response.json();
-      console.log(data);
-
       return data;
     } catch (error) {
       alert(error);
@@ -25,11 +21,12 @@ export default class weather {
 
   //   the functions below organizes the api json file
   static convertData(data) {
-    const forecast = data.forecast.forecastday[0];
+    const forecast = data.forecast.forecastday;
     return {
       location: weather.parseLocation(data),
       current: weather.parseCurrentWeather(data),
-      forecast: weather.parseForecast(forecast),
+      forecast: weather.parseForecast(forecast[0]),
+      forecastTommorrow: weather.parseForecast(forecast[1]),
     };
   }
 
@@ -74,7 +71,7 @@ export default class weather {
 
   // calculate percentage bars
   static calculateUV(value) {
-    const MAX_UV = 11;
+    const MAX_UV = 9;
     return (value / MAX_UV) * 100;
   }
 

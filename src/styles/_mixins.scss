@@ -21,3 +21,12 @@ $secondary-color: #c0c2cf;
     0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px #9b9eac8e,
     inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
 }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
