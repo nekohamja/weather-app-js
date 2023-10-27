@@ -1,13 +1,16 @@
 @import "mixins";
 
+// layout
 .header {
   grid-column: 1/5;
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   gap: 22px;
 
+  > h3 {
+    font-size: 1em;
+  }
   .heading {
     display: flex;
     justify-content: space-between;
@@ -47,35 +50,7 @@
       padding: 12px 12px;
     }
   }
-  .temperature-scale {
-    // @include neumorphism(0px, 12px);
-    border-radius: 12px;
-    width: 72px;
-    height: 32px;
-    display: flex;
-    overflow: hidden;
-    align-self: center;
-    button {
-      width: 100%;
-      transition: box-shadow 200ms ease-in-out;
-      z-index: 10;
-      font-weight: bold;
-      color: $font-color;
-    }
-    .fahrenheit {
-      @include neumorphism(0px, 0px);
-      &.active {
-        @include neumorphism-inset(none, 0px);
-      }
-    }
-    .celsius {
-      @include neumorphism(0px, 0px);
-      &.active {
-        @include neumorphism-inset(none, 0px);
-      }
-    }
-  }
-  .search-message {
+  .loading-icon {
     display: none;
     width: 10%;
     &.active {
@@ -84,11 +59,10 @@
     }
   }
 }
-
 .current-weather {
   grid-column: 1/5;
   grid-row: 2/3;
-  @include neumorphism-inset(12px, 22px);
+  @include neumorphism-inset(22px, 22px);
   display: flex;
   gap: 22px;
 
@@ -113,9 +87,6 @@
       align-items: center;
       gap: 2px;
     }
-    h1 {
-      font-size: 3em;
-    }
     img {
       width: 48px;
     }
@@ -139,6 +110,7 @@
         gap: 8px;
         > p:last-child {
           text-align: end;
+          opacity: 0.6;
           flex: 1;
         }
       }
@@ -167,10 +139,38 @@
     }
   }
 }
-
 .forecast-title {
   grid-column: 1/5;
   grid-row: 3/4;
+  display: flex;
+  justify-content: space-between;
+  .temperature-scale {
+    border-radius: 12px;
+    width: 100px;
+    height: 32px;
+    display: flex;
+    overflow: hidden;
+    align-self: center;
+    button {
+      width: 100%;
+      transition: box-shadow 200ms ease-in-out;
+      z-index: 10;
+      font-weight: bold;
+      color: $font-color;
+    }
+    .fahrenheit {
+      @include neumorphism(0px, 0px);
+      &.active {
+        @include neumorphism-inset(none, 0px);
+      }
+    }
+    .celsius {
+      @include neumorphism(0px, 0px);
+      &.active {
+        @include neumorphism-inset(none, 0px);
+      }
+    }
+  }
 }
 .forecast {
   grid-column: 1/5;
@@ -178,10 +178,15 @@
   @include neumorphism-inset(0px, 22px);
   overflow: hidden;
 
+  h3 {
+    padding: 8px 22px;
+    font-size: 1.2em;
+    opacity: 0.8;
+  }
   .astro {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    padding: 12px;
+    padding: 22px;
     gap: 12px;
     > div {
       display: flex;
@@ -190,12 +195,10 @@
       > p:nth-child(2) {
         flex: 1;
       }
+      > p:last-child {
+        opacity: 0.6;
+      }
     }
-  }
-  h3 {
-    padding: 12px 12px 0px 12px;
-    font-size: 1.1em;
-    opacity: 0.8;
   }
   .hour-forecast {
     .forecast-today-slider,
@@ -205,9 +208,7 @@
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
       gap: 22px;
-      padding-left: 22px;
-      padding-bottom: 4px;
-      padding-top: 12px;
+      padding: 0px 22px;
       margin-bottom: 12px;
 
       &::-webkit-scrollbar {
@@ -226,12 +227,15 @@
       .card {
         @include neumorphism-inset(12px, 12px);
         scroll-snap-align: start;
-        scroll-margin-inline-start: 12px;
-        scroll-margin-inline-end: 12px;
-        flex: 0 0 40%;
+        scroll-margin-inline-start: 22px;
+        flex: 0 0 35%;
         > p:nth-child(2) {
           font-weight: bold;
-          font-size: 1.2em;
+          font-size: 1.4em;
+        }
+        > p:last-child {
+          font-size: 0.8em;
+          opacity: 0.6;
         }
         > img {
           width: 48px;
@@ -239,4 +243,19 @@
       }
     }
   }
+}
+
+// animations
+#weather-icon,
+.card:nth-child(even) > img {
+  animation: 3s weather-icon linear infinite;
+}
+.card:nth-child(odd) > img {
+  animation: 3s weather-icon reverse infinite;
+}
+.card > img[src*="./weather/64x64/day/113.png"] {
+  animation: 5s spin linear infinite;
+}
+.card > img[src*="./weather/64x64/night/113.png"] {
+  animation: 2s moon linear infinite;
 }

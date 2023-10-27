@@ -7,6 +7,28 @@
     transform: rotate(360deg);
   }
 }
+@keyframes weather-icon {
+  0% {
+    transform: translateY(0px);
+  }
+  30% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+@keyframes moon {
+  0% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(-30deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
 * {
   margin: 0;
   padding: 0;
@@ -28,19 +50,19 @@ body {
 
 p {
   margin: 0;
-  font-size: 0.9em;
+  font-size: 1em;
   color: rgb(66, 65, 77);
 }
 
 h1 {
   margin: 0;
-  font-size: 1.5em;
+  font-size: 4em;
   color: rgb(66, 65, 77);
 }
 
 h3 {
   margin: 0;
-  font-size: 1.3em;
+  font-size: 1.5em;
   color: rgb(66, 65, 77);
 }
 
@@ -64,14 +86,14 @@ input::placeholder {
 
 main {
   display: grid;
-  width: clamp(550px, 50%, 700px);
+  width: clamp(700px, 50%, 900px);
   gap: 22px;
   padding: 42px;
   grid-template-columns: repeat(4, 1fr);
   background: #eef0f4;
 }
 
-@media (width <= 425px) {
+@media (width <= 550px) {
   main {
     width: 100%;
     padding: 12px;
@@ -99,6 +121,10 @@ main {
   main .forecast .astro {
     grid-template-columns: repeat(1, 1fr);
   }
+  main .forecast .hour-forecast .forecast-today-slider .card,
+  main .forecast .hour-forecast .forecast-tomorrow-slider .card {
+    flex: 0 0 55%;
+  }
 }
 @keyframes spin {
   0% {
@@ -108,12 +134,37 @@ main {
     transform: rotate(360deg);
   }
 }
+@keyframes weather-icon {
+  0% {
+    transform: translateY(0px);
+  }
+  30% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+@keyframes moon {
+  0% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(-30deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
 .header {
   grid-column: 1/5;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 22px;
+}
+.header > h3 {
+  font-size: 1em;
 }
 .header .heading {
   display: flex;
@@ -159,46 +210,11 @@ main {
   border-radius: 12px;
   padding: 12px 12px;
 }
-.header .temperature-scale {
-  border-radius: 12px;
-  width: 72px;
-  height: 32px;
-  display: flex;
-  overflow: hidden;
-  align-self: center;
-}
-.header .temperature-scale button {
-  width: 100%;
-  transition: box-shadow 200ms ease-in-out;
-  z-index: 10;
-  font-weight: bold;
-  color: rgb(66, 65, 77);
-}
-.header .temperature-scale .fahrenheit {
-  padding: 0px;
-  border-radius: 0px;
-  box-shadow: 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
-}
-.header .temperature-scale .fahrenheit.active {
-  padding: none;
-  border-radius: 0px;
-  box-shadow: 0px 0px 0px 0px rgba(155, 158, 172, 0.5568627451), 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
-}
-.header .temperature-scale .celsius {
-  padding: 0px;
-  border-radius: 0px;
-  box-shadow: 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
-}
-.header .temperature-scale .celsius.active {
-  padding: none;
-  border-radius: 0px;
-  box-shadow: 0px 0px 0px 0px rgba(155, 158, 172, 0.5568627451), 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
-}
-.header .search-message {
+.header .loading-icon {
   display: none;
   width: 10%;
 }
-.header .search-message.active {
+.header .loading-icon.active {
   display: flex;
   animation: 0.5s spin infinite linear;
 }
@@ -206,7 +222,7 @@ main {
 .current-weather {
   grid-column: 1/5;
   grid-row: 2/3;
-  padding: 12px;
+  padding: 22px;
   border-radius: 22px;
   box-shadow: 0px 0px 0px 0px rgba(155, 158, 172, 0.5568627451), 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
   display: flex;
@@ -235,9 +251,6 @@ main {
   align-items: center;
   gap: 2px;
 }
-.current-weather > div:first-child h1 {
-  font-size: 3em;
-}
 .current-weather > div:first-child img {
   width: 48px;
 }
@@ -262,6 +275,7 @@ main {
 }
 .current-weather > div:last-child > .parameter > div:first-child > p:last-child {
   text-align: end;
+  opacity: 0.6;
   flex: 1;
 }
 .current-weather > div:last-child > .parameter > .percentage {
@@ -290,6 +304,43 @@ main {
 .forecast-title {
   grid-column: 1/5;
   grid-row: 3/4;
+  display: flex;
+  justify-content: space-between;
+}
+.forecast-title .temperature-scale {
+  border-radius: 12px;
+  width: 100px;
+  height: 32px;
+  display: flex;
+  overflow: hidden;
+  align-self: center;
+}
+.forecast-title .temperature-scale button {
+  width: 100%;
+  transition: box-shadow 200ms ease-in-out;
+  z-index: 10;
+  font-weight: bold;
+  color: rgb(66, 65, 77);
+}
+.forecast-title .temperature-scale .fahrenheit {
+  padding: 0px;
+  border-radius: 0px;
+  box-shadow: 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
+}
+.forecast-title .temperature-scale .fahrenheit.active {
+  padding: none;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px 0px rgba(155, 158, 172, 0.5568627451), 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
+}
+.forecast-title .temperature-scale .celsius {
+  padding: 0px;
+  border-radius: 0px;
+  box-shadow: 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
+}
+.forecast-title .temperature-scale .celsius.active {
+  padding: none;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px 0px rgba(155, 158, 172, 0.5568627451), 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
 }
 
 .forecast {
@@ -300,10 +351,15 @@ main {
   box-shadow: 0px 0px 0px 0px rgba(155, 158, 172, 0.5568627451), 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
   overflow: hidden;
 }
+.forecast h3 {
+  padding: 8px 22px;
+  font-size: 1.2em;
+  opacity: 0.8;
+}
 .forecast .astro {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  padding: 12px;
+  padding: 22px;
   gap: 12px;
 }
 .forecast .astro > div {
@@ -314,10 +370,8 @@ main {
 .forecast .astro > div > p:nth-child(2) {
   flex: 1;
 }
-.forecast h3 {
-  padding: 12px 12px 0px 12px;
-  font-size: 1.1em;
-  opacity: 0.8;
+.forecast .astro > div > p:last-child {
+  opacity: 0.6;
 }
 .forecast .hour-forecast .forecast-today-slider,
 .forecast .hour-forecast .forecast-tomorrow-slider {
@@ -326,9 +380,7 @@ main {
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   gap: 22px;
-  padding-left: 22px;
-  padding-bottom: 4px;
-  padding-top: 12px;
+  padding: 0px 22px;
   margin-bottom: 12px;
 }
 .forecast .hour-forecast .forecast-today-slider::-webkit-scrollbar,
@@ -350,18 +402,39 @@ main {
   border-radius: 12px;
   box-shadow: 0px 0px 0px 0px rgba(155, 158, 172, 0.5568627451), 0px 0px 0px 0px rgba(255, 255, 255, 0.7), inset 5px 5px 5px -1px rgba(155, 158, 172, 0.5568627451), inset -5px -5px 5px 1px rgba(255, 255, 255, 0.7);
   scroll-snap-align: start;
-  scroll-margin-inline-start: 12px;
-  scroll-margin-inline-end: 12px;
-  flex: 0 0 40%;
+  scroll-margin-inline-start: 22px;
+  flex: 0 0 35%;
 }
 .forecast .hour-forecast .forecast-today-slider .card > p:nth-child(2),
 .forecast .hour-forecast .forecast-tomorrow-slider .card > p:nth-child(2) {
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.4em;
+}
+.forecast .hour-forecast .forecast-today-slider .card > p:last-child,
+.forecast .hour-forecast .forecast-tomorrow-slider .card > p:last-child {
+  font-size: 0.8em;
+  opacity: 0.6;
 }
 .forecast .hour-forecast .forecast-today-slider .card > img,
 .forecast .hour-forecast .forecast-tomorrow-slider .card > img {
   width: 48px;
+}
+
+#weather-icon,
+.card:nth-child(even) > img {
+  animation: 3s weather-icon linear infinite;
+}
+
+.card:nth-child(odd) > img {
+  animation: 3s weather-icon reverse infinite;
+}
+
+.card > img[src*="./weather/64x64/day/113.png"] {
+  animation: 5s spin linear infinite;
+}
+
+.card > img[src*="./weather/64x64/night/113.png"] {
+  animation: 2s moon linear infinite;
 }
 
 @keyframes spin {
@@ -370,5 +443,27 @@ main {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+@keyframes weather-icon {
+  0% {
+    transform: translateY(0px);
+  }
+  30% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+@keyframes moon {
+  0% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(-30deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }

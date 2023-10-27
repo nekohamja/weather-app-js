@@ -70,7 +70,6 @@ export default class ui {
     const fahrenheitButton = document.querySelector(".fahrenheit");
     const temperature = document.querySelector("#temperature");
     const feelslike = document.querySelector("#feelslike");
-
     const forecastTempToday = document.querySelectorAll(".forecast-temp");
     const forecastTempTomorrow = document.querySelectorAll(
       ".forecast-tomorrow-temp"
@@ -218,14 +217,18 @@ export default class ui {
   }
 
   static OpenLoadingIcon() {
-    const searchMessage = document.querySelector(".search-message");
+    const searchMessage = document.querySelector(".loading-icon");
     searchMessage.classList.toggle("active");
   }
 
   static clear() {
     const searchBar = document.querySelector(".search-bar");
     const searchInput = document.querySelector("#search");
+    const sliders = document.querySelectorAll(".hour-forecast>div");
 
+    sliders.forEach((slider) => {
+      slider.scrollLeft = slider.scrollLeft - 5000;
+    });
     searchBar.classList.remove("active");
     searchInput.blur();
   }

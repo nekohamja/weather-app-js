@@ -22,19 +22,19 @@ body {
 
 p {
   margin: 0;
-  font-size: 0.9em;
+  font-size: 1em;
   color: $font-color;
 }
 
 h1 {
   margin: 0;
-  font-size: 1.5em;
+  font-size: 4em;
   color: $font-color;
 }
 
 h3 {
   margin: 0;
-  font-size: 1.3em;
+  font-size: 1.5em;
   color: $font-color;
 }
 
@@ -58,14 +58,14 @@ input {
 
 main {
   display: grid;
-  width: clamp(550px, 50%, 700px);
+  width: clamp(700px, 50%, 900px);
   gap: 22px;
   padding: 42px;
   grid-template-columns: repeat(4, 1fr);
   background: $main-color;
 }
 
-@media (width<=425px) {
+@media (width<=550px) {
   main {
     width: 100%;
     padding: 12px;
@@ -92,6 +92,14 @@ main {
       grid-row: 5/7;
       .astro {
         grid-template-columns: repeat(1, 1fr);
+      }
+      .hour-forecast {
+        .forecast-today-slider,
+        .forecast-tomorrow-slider {
+          .card {
+            flex: 0 0 55%;
+          }
+        }
       }
     }
   }
