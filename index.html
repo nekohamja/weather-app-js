@@ -13,12 +13,8 @@
         <h3>Weather™</h3>
         <div class="heading">
           <div>
-            <h1 class="greeting"></h1>
+            <h3 class="greeting"></h3>
             <p id="date"></p>
-          </div>
-          <div class="temperature-scale">
-            <button class="celsius active">°C</button>
-            <button class="fahrenheit">°F</button>
           </div>
         </div>
         <div class="search-bar">
@@ -36,7 +32,7 @@
           </div>
           <input id="search" type="text" placeholder="Search your city..." />
           <svg
-            class="search-message"
+            class="loading-icon"
             width="18"
             height="18"
             xmlns="http://www.w3.org/2000/svg"
@@ -150,7 +146,14 @@
           </div>
         </div>
       </section>
-      <h3 class="forecast-title">Forecast</h3>
+      <div class="forecast-title">
+        <h3>Forecast</h3>
+        <div class="temperature-scale">
+          <button class="celsius active">°C</button>
+          <button class="fahrenheit">°F</button>
+        </div>
+      </div>
+
       <section class="forecast">
         <div class="astro">
           <div>
